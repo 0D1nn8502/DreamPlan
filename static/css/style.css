@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: cyan;
     margin: 0;
     padding: 20px;
 }
@@ -9,8 +9,8 @@ body {
     max-width: 600px;
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
     margin: auto;
 }
 
@@ -21,7 +21,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
@@ -31,15 +31,18 @@ textarea {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    resize: none; 
+    font-size: 16px; 
 }
 
 button {
     background: #007bff;
     color: white;
-    padding: 10px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px; 
     cursor: pointer;
+    transition: background 0.3s ease-in-out; 
 }
 
 button:hover {
@@ -54,11 +57,16 @@ button:hover {
 .checklist li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: #f9f9f9;
+    gap: 12px;
+    background: goldenrod;
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    transition: background 0.3s ease-in-out;
+}
+
+.checklist li:hover {
+    background: lightseagreen;
 }
 
 input[type="checkbox"] {
@@ -83,3 +91,35 @@ input[type="checkbox"] {
 .delete-btn:hover {
     background: #cc0000;
 }
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .concern-media {
+        max-width: 100%;
+        max-height: 200px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .checklist li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+} 
