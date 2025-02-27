@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerns Checklist</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Concerns Checklist</h1>
+
+        <!-- Form to submit new concerns -->
+        <form action="/add" method="post" enctype="multipart/form-data">
+            <textarea name="text" placeholder="Enter your concern..." required></textarea>
+            <input type="file" name="media" accept="image/*, video/*">
+            <button type="submit">Submit Concern</button>
+        </form>
+
+        <!-- Checklist of submitted concerns -->
+        <ul class="checklist">
+            {% for concern in concerns %}
+                <li>
+                    <input type="checkbox" id="concern-{{ concern[0] }}">
+                    <label for="concern-{{ concern[0] }}">{{ concern[1] }}</label>
+                    
+                    {% if concern[2] %}
+                        {% if concern[2].endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')) %}
+                            <img src="{{ url_for('uploads', path=concern[2].split('/')[-1]) }}" class="concern-media" alt="Concern Image">
+                        {% elif concern[2].endswith(('.mp4', '.webm', '.ogg')) %}
+                            <video controls class="concern-media">
+                                <source src="{{ url_for('uploads', path=concern[2].split('/')[-1]) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Delete button for concerns -->
+                    <form action="/delete/{{ concern[0] }}" method="post">
+                        <button type="submit" class="delete-btn">❌ Remove</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
